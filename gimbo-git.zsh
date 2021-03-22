@@ -37,9 +37,11 @@ alias gbsg='git bisect good'
 alias gbsr='git bisect reset'
 alias gbss='git bisect start'
 
-alias gc='git commit -v'
-alias gc!='git commit -v --amend'
-alias gcn!='git commit -v --no-edit --amend'
+# These next 3 _are_ from the oh-my-zsh git plugin, but we remove the -v flag,
+# preferring to set it by hand when desired.
+alias gc='git commit'
+alias gc!='git commit --amend'
+alias gcn!='git commit --no-edit --amend'
 alias gclean='git clean -id'
 alias gpristine='git reset --hard && git clean -dfx'
 alias gco='git checkout'
