@@ -105,7 +105,7 @@ alias gru='git reset --'
 
 alias gsh='git show'
 alias gstd='git stash drop'
-alias gstl='git stash list'
+alias gstl='git stash list | cat'
 alias gstp='git stash pop'
 alias gstall='git stash --all'
 
