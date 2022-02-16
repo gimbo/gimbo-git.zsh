@@ -149,6 +149,8 @@ alias gstpu='git stash push'
 alias gsts='git stash show'
 alias gu='git unstage'
 
+# Sneaking this in here as it's strongly git-related
+alias pcra='pre-commit run --all-files'
 
 
 # SECTION 3: Handy functions
