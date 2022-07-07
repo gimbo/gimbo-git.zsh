@@ -147,6 +147,7 @@ alias gs='git status'
 alias gsta='git stash apply'
 alias gstpu='git stash push'
 alias gsts='git stash show'
+alias gsw='git switch'
 alias gu='git unstage'
 # "which main/master?"
 alias gwm='git branch -l main master | head -n 1 | cut -c3-'
