@@ -1,0 +1,7 @@
+# Remove local git branches where the remote has gone away (and clean
+# up remotes!)
+#
+# Via https://stackoverflow.com/questions/7726949/remove-local-branches-no-longer-on-remote
+
+git fetch -p
+git branch -vv | awk '{print $1,$4}' | grep 'gone]' | awk '{print $1}' | xargs git branch -D

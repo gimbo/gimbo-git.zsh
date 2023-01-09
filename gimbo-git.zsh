@@ -159,44 +159,4 @@ alias pcra='pre-commit run --all-files'
 
 # SECTION 3: Handy functions
 
-# Remove local git branches where the remote has gone away (and clean
-# up remotes!)
-#
-# Via https://stackoverflow.com/questions/7726949/remove-local-branches-no-longer-on-remote
-#
-git-clean-branches() {
-    git fetch -p
-    git branch -vv | awk '{print $1,$4}' | grep 'gone]' | awk '{print $1}' | xargs git branch -D
-}
-
-
-# Shrink the repo
-#
-git-shrink() {
-    if [[ "$(git stash list | wc -l)" -eq 0 ]]; then
-        du -hs "`git rev-parse --show-toplevel`/.git"
-        git reflog expire --expire=now --all
-        git gc --prune=now
-        du -hs "`git rev-parse --show-toplevel`/.git"
-    else
-        echo "Refusing to shrink because your stash is not empty."
-    fi
-}
-
-
-# Via Ken Lewerentz, a command to list git branches in descending
-# chronological order with blame.
-#
-# Munged from https://gist.github.com/kneckinator/c399acc3abf54fabd8a58a881affba67
-
-_git-list-refs() {
-    git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes
-}
-
-alias _wtf-ken='awk '\''! a[$0]++'\'''
-
-git-branch-tips() {
-    for ref in $(_git-list-refs); do
-        git log -n1 ${ref} --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat
-    done | _wtf-ken
-}
+autoload -Uz git-clean-branches git-shrink git-branch-tips

@@ -1,0 +1,14 @@
+# Via Ken Lewerentz, a command to list git branches in descending
+# chronological order with blame.
+#
+# Munged from https://gist.github.com/kneckinator/c399acc3abf54fabd8a58a881affba67
+
+_git-list-refs() {
+    git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes
+}
+
+alias _wtf-ken='awk '\''! a[$0]++'\'''
+
+for ref in $(_git-list-refs); do
+    git log -n1 ${ref} --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat
+done | _wtf-ken

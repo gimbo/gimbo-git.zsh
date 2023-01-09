@@ -1,0 +1,10 @@
+# Shrink the repo
+#
+if [[ "$(git stash list | wc -l)" -eq 0 ]]; then
+    du -hs "`git rev-parse --show-toplevel`/.git"
+    git reflog expire --expire=now --all
+    git gc --prune=now
+    du -hs "`git rev-parse --show-toplevel`/.git"
+else
+    echo "Refusing to shrink because your stash is not empty."
+fi
