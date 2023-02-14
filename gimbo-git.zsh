@@ -128,6 +128,7 @@ alias ghcp="git rev-parse HEAD | tr -d '\n' | pbcopy"
 alias glor='git --no-pager log --oneline --decorate --graph -n20'
 alias glr='glg -g'  # git reflog with more detail
 alias gmn='git merge --no-ff'
+alias gmm='git merge `gwm`'  # merge master or main in
 alias gorigin='git reset --hard origin/`git rev-parse --abbrev-ref HEAD`'
 alias gptag='git push && git push --tags'
 alias grbid='git rebase -i develop'
