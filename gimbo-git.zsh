@@ -123,7 +123,6 @@ alias gcmqq='git commit --no-verify -m'
 alias gdc='git diff --cached'
 alias gcom='git checkout `gwm`'
 alias gcod='git checkout develop'
-alias gh='git rev-parse HEAD'
 alias ghcp="git rev-parse HEAD | tr -d '\n' | pbcopy"
 alias glor='git --no-pager log --oneline --decorate --graph -n20'
 alias glr='glg -g'  # git reflog with more detail
