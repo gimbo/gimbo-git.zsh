@@ -44,6 +44,8 @@ alias gc!='git commit --amend'
 alias gcn!='git commit --no-edit --amend'
 alias gclean='git clean -id'
 alias gpristine='git reset --hard && git clean -dfx'
+# Restore: discard unstaged changes, retain staged ones
+alias grs='git restore --'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
 alias gcpa='git cherry-pick --abort'
@@ -97,16 +99,18 @@ alias grbi='git rebase -i'
 alias grbm='git rebase `gwm`'
 
 alias grh='git reset'
+alias gru='git reset --'
 alias grhh='git reset --hard'
 alias grm='git rm'
 alias grmc='git rm --cached'
-alias gru='git reset --'
 
 alias gsh='git show'
 alias gstd='git stash drop'
 alias gstl='git stash list | cat'
 alias gstp='git stash pop'
 alias gstall='git stash --all'
+
+alias gsw='git switch'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 
@@ -121,13 +125,16 @@ alias gcme='git commit -e -m'
 alias gcmq='SKIP=pytest git commit -m'
 alias gcmqq='git commit --no-verify -m'
 alias gdc='git diff --cached'
-alias gcom='git checkout `gwm`'
-alias gcod='git checkout develop'
+# Copy the current commit hash to the clipboard
 alias ghcp="git rev-parse HEAD | tr -d '\n' | pbcopy"
+# Compact summary log of last 20 commits
 alias glor='git --no-pager log --oneline --decorate --graph -n20'
-alias glr='glg -g'  # git reflog with more detail
+# git reflog with more detail
+alias glr='glg -g'
 alias gmn='git merge --no-ff'
-alias gmm='git merge `gwm`'  # merge master or main in
+# merge master or main into the current branch
+alias gmm='git merge `gwm`'
+# reset to origin status of current branch
 alias gorigin='git reset --hard origin/`git rev-parse --abbrev-ref HEAD`'
 alias gptag='git push && git push --tags'
 alias grbid='git rebase -i develop'
@@ -143,12 +150,14 @@ alias grbi7='git rebase -i HEAD~7'
 alias grbi8='git rebase -i HEAD~8'
 alias grbi9='git rebase -i HEAD~9'
 alias grbi10='git rebase -i HEAD~10'
-alias grs='git reset --soft'
+# Restore with extreme prejudice: discard staged and unstaged changes
+alias grs!='git restore --staged --worktree --'
 alias gs='git status'
 alias gsta='git stash apply'
 alias gstpu='git stash push'
 alias gsts='git stash show'
-alias gsw='git switch'
+alias gs-='git switch -'
+alias gsm='git switch `gwm`'
 alias gu='git unstage'
 # "which main/master?"
 alias gwm='git branch -l main master | head -n 1 | cut -c3-'
