@@ -1,9 +1,9 @@
 # Andy's git zsh config, consisting of:
 #
 # 1. A subset of the aliases defined in the oh-my-zsh git plugin (see
-#    https://github.com/robbyrussell/oh-my-zsh/) - this is still a
-#    large list but the full set is overwhelming and most of it I
-#    never ever used.
+#    https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git) - this is
+#    still a large list but the full set is overwhelming and most of it
+#    I never ever used.
 #
 # 2. Some aliases of my own (a few of which override the ones the
 #    oh-my-zsh git plugin would define).
@@ -111,6 +111,7 @@ alias gstp='git stash pop'
 alias gstall='git stash --all'
 
 alias gsw='git switch'
+alias gswm='git switch `gwm`'  # Slightly different implementation to oh-my-zsh
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 
@@ -157,7 +158,6 @@ alias gsta='git stash apply'
 alias gstpu='git stash push'
 alias gsts='git stash show'
 alias gs-='git switch -'
-alias gsm='git switch `gwm`'
 alias gu='git unstage'
 # "which main/master?"
 alias gwm='git branch -l main master | head -n 1 | cut -c3-'
