@@ -58,6 +58,7 @@ alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gdw='git diff --word-diff'
 
 alias gf='git fetch'
+alias gfp='git fetch --prune'
 
 alias gfg='git ls-files | grep'
 
