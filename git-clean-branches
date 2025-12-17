@@ -1,7 +1,31 @@
-# Remove local git branches where the remote has gone away (and clean
-# up remotes!)
-#
-# Via https://stackoverflow.com/questions/7726949/remove-local-branches-no-longer-on-remote
+# Delete local branches that have been merged into the default branch and deleted.
 
-git fetch -p
-git branch -vv | awk '{print $1,$4}' | grep 'gone]' | awk '{print $1}' | xargs git branch -D
+_git_clean_branches() {
+  # Fetch updates from remotes and remove local references to remote branches
+  # that no longer exist on the server.
+  echo "Fetching and pruning.."
+  git fetch --prune || return $?
+
+  # Detect the default branch (origin/HEAD), fallback to current
+  default_branch="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's@^origin/@@')"
+  [ -z "$default_branch" ] && default_branch="$(git rev-parse --abbrev-ref HEAD)"
+  echo "Default branch detected as '$default_branch'"
+
+  # Delete local branches that are fully merged into the default branch and
+  # whose upstream is [gone].  Skip main, master, and the default branch
+  # itself.
+  to_clean=$(
+    git branch -vv --merged "$default_branch" \
+      --format='%(refname:short) %(upstream:trackshort)' |
+      awk '$1!="main" && $1!="master" && $1!="'"$default_branch"'" && $2 ~ /gone/ {print $1}'
+  )
+  echo "Branches to clean:"
+  echo "$to_clean"
+
+#   git branch --merged "$default_branch" \
+#     --format='%(refname:short) %(upstream:trackshort)' |
+#     awk '$1!="main" && $1!="master" && $1!="'"$default_branch"'" && $2 ~ /gone/ {print $1}' |
+#     xargs -r git branch -d
+}
+
+_git_clean_branches

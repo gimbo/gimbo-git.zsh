@@ -170,3 +170,4 @@ alias pcra='pre-commit run --all-files'
 # SECTION 3: Handy functions
 
 autoload -Uz git-clean-branches git-shrink git-branch-tips
+alias gcb='git-clean-branches'
