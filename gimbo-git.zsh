@@ -121,6 +121,7 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 
 alias g='git status --short'
 alias gap='git add -p'
+alias gbye='git switch --detach $(git rev-parse HEAD)'  # AKA 'git detach'
 alias gcm='git commit -m'
 alias gcme='git commit -e -m'
 alias gcmq='SKIP=pytest git commit -m'
