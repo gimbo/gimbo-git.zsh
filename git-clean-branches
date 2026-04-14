@@ -16,16 +16,13 @@ _git_clean_branches() {
   # itself.
   to_clean=$(
     git branch -vv --merged "$default_branch" \
-      --format='%(refname:short) %(upstream:trackshort)' |
+      --format='%(refname:short) %(upstream:track)' |
       awk '$1!="main" && $1!="master" && $1!="'"$default_branch"'" && $2 ~ /gone/ {print $1}'
   )
   echo "Branches to clean:"
   echo "$to_clean"
 
-#   git branch --merged "$default_branch" \
-#     --format='%(refname:short) %(upstream:trackshort)' |
-#     awk '$1!="main" && $1!="master" && $1!="'"$default_branch"'" && $2 ~ /gone/ {print $1}' |
-#     xargs -r git branch -d
+  echo "$to_clean" | xargs -r git branch -d
 }
 
 _git_clean_branches
